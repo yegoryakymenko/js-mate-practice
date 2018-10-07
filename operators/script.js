@@ -13,7 +13,7 @@ var r = '6' + []; // '6'
 
 var r = '6' + null; // '6null'
 // 2 task
-2/3 + 1 + 1/3 == 2 // true
+2/3 + 1 + 1/3 == 2 // false
 // 3 task
 var r = 6 && 0 && 7; // true
 

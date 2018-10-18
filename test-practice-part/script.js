@@ -1,21 +1,21 @@
 // 1
 let a = function length(arr) {
-	console.log(arr.length);
+	return arr.length;
 }
 
 let b = [1,2,3,4,5];
 a(b);
 // 2
 function countArg() {
-		console.log(arguments.length);
+		return arguments.length;
 }
 countArg(1,2,3,4,5);
 // 3
 let c = function emptyElements(arr) {
 	for (i = 0; i < arr.length; i ++) {
-		if(arr[i] == '') {
+		if(!Array.isArray(arr[i])) {
 			delete arr[i];
-		} else if(arr[i].isArray) {
+		} else if(Array.isArray(arr[i])) {
 			return emptyElements(arr[i]);
 		}
 	}
@@ -23,7 +23,7 @@ let c = function emptyElements(arr) {
 }
 // 4
 let d = function reverseSort(arr) {
-	console.log(arr.reverse())
+	return arr.reverse();
 }
 // 5
 var date = new Date();
@@ -42,18 +42,23 @@ let e = function dateObject(date) {
 console.log(e(date));
 // 6
 	
-setTimeout(function() {
-	console.log(Object.keys(date).length);
-}, 1000)
+var time = function(){
+	setTimeout(function() {
+		return Object.keys(date).length;
+}, 1000)}
+time();
 // 7
 var check = function() {
-	var value = prompt("Enter your name");
-	if(value == '') {
-		setInterval(function(){
-			value = prompt("Again, please, enter your name");
+	var value = prompt("Enter your name", "");
+	if(!value) {
+		var int = setInterval(function() {
+			value = prompt("Please, enter your name", "");
+			if(value) {
+				clearInterval(int);
+			}
 		}, 2000)
 	}else {
-		alert(value);
+		return;
 	}
 }
 check();

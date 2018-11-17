@@ -1,95 +1,58 @@
-
 // 1
-var name = "Grisha";
-function returnName() {
-return this.name
-}
-var obj = {
-	name: "Ivan"
-}
-console.log(returnName.call(obj));
-console.log(returnName());
-// 2
-var int = 3;
-
-var obj2 = {
-	int: 5
-}
-
-function getDoubled() {
-	return this.int *=2;
-}
-
-function getDoubledTrippled() {
-	this.int = getDoubled.call(this);
-	return this.int *= 3;
-}
-
-//console.log(getDoubledTrippled.call(obj2));
- var triple = getDoubledTrippled.bind(this);
- console.log(triple());
-console.log(triple());
-// 3
-var popular = 0;
-function City(name, population, country) {
-	this.name = name;
-	this.population = population;
-	this.country = country;
-	this.getPopulation = function() {
-		return this.population;
-}
-	this.getCityName = function() {
-	return this.name;
-}
-	Object.defineProperty(this, 'AREA', {
-  		enumerable: true,
-  		configurable: false,
-  		writable: false,
-  		value: 'stc'});
-	this.addCitizen = function() {
-	return popular += 1;
-}
-}
-
-var Canadian = new City("Monreal","1250","Canda");
-console.log(Canadian.addCitizen());
-console.log(Canadian.AREA);	
-
-// 4
-
 function User(fullName) {
   this.fullName = fullName;
-	Object.defineProperty(this, 'firstName', {
-  		enumerable: false,
-  		configurable: true,
-  		writable: true
-		});
-	Object.defineProperty(this, 'lastName', {
-  		enumerable: false,
-  		configurable: true,
-  		writable: true
-  		});
-
+  let name = fullName.split(' ');
+  Object.defineProperty(this, 'firstName', {
+    get: function() {
+      return name[0];
+    },
+    set: function(firstName) {
+      this.fullName = firstName + ' ' + this.lastName;
+    }
+  });
+  Object.defineProperty(this, 'lastName', {
+    get: function() {
+      return name[1];
+    },
+    set: function(lastName) {
+      this.fullName = this.firstName + ' ' + lastName;
+    }
+  });
 }
 
 var vasya = new User('Александр Пушкин');
-vasya.firstName = "Sanya";
+vasya.firstName = "Sisha";
 console.log(vasya.firstName);
-vasya.lastName = "Pushkin";
-console.log(vasya.lastName);
+console.log(vasya.fullName);
 
-//5 
-function Calculator(){
- 	this.Calculate = function(str) {
-	var result;
-	var exp = str.split(' ');
-	console.log(exp);
-	if(exp.includes('+')) {
-		return result = Number(exp[0]) + Number(exp[2]);
-}	else {
-		return result = Number(exp[0]) - Number(exp[2]);
-}
-}
-}
-var Jen = new Calculator;
-console.log(Jen.Calculate('91 - 2'));
+// 2
+function Calculator() {
+  let method = {
+    '+': function(a,b) {
+      return a + b;
+    },
+    '-': function(a,b) {
+      return a - b;
+    }
+  }
+
+  this.addMethod = function(type, func) {
+    method[type] = func;
+  }
+  this.calculate = function(str) {
+    let arr = str.split(' ');
+    a = +arr[0];
+    b = +arr[2];
+    operand = arr[1]
+    return method[operand](a,b);
+  }
+};
+
+let calc = new Calculator();
+console.log(calc.calculate('1 + 2'));
+var powerCalc = new Calculator;
+powerCalc.addMethod('*', function(a, b) {
+  return a * b;
+});
+let result = powerCalc.calculate('20 * 3');
+console.log(result);  

@@ -15,13 +15,13 @@ var rabbit = { jumps: true };
 
 rabbit.__proto__ = animal;
 
-alert( rabbit.jumps ); // true
+//alert( rabbit.jumps ); // true
 
 delete rabbit.jumps;
-alert( rabbit.jumps ); // null
+//alert( rabbit.jumps ); // null
 
 delete animal.jumps;
-alert( rabbit.jumps);  // undefined
+//alert( rabbit.jumps);  // undefined
 // 3
 var head = {
   glasses: 1
@@ -52,7 +52,7 @@ var rabbit = new Rabbit();
 
 Rabbit.prototype = {};
 
-alert(rabbit.eats);
+//alert(rabbit.eats);
 // true
 
 function Rabbit(name) { }
@@ -62,7 +62,7 @@ var rabbit = new Rabbit();
 
 Rabbit.prototype.eats = false; // (*)
 
-alert(rabbit.eats);
+//alert(rabbit.eats);
 // false
 
 function Rabbit(name) { }
@@ -72,18 +72,18 @@ var rabbit = new Rabbit();
 
 delete Rabbit.prototype.eats; // (*)
 
-alert(rabbit.eats); // undefined
+// alert(rabbit.eats); // undefined
 // 5
-function Rabbit() { }
-Rabbit.prototype.test = function() { alert(this); }
+// function Rabbit() { }
+// Rabbit.prototype.test = function() { alert(this); }
 
-var rabbit = new Rabbit();
+// var rabbit = new Rabbit();
 
-rabbit.test(); // IE 9+ Chrome
-rabbit.__proto__.test(); // Chrome
-Rabbit.prototype.test(); // Chrome
-Object.getPrototypeOf(rabbit).test(); // Chrome
-// 6
+// rabbit.test(); // IE 9+ Chrome
+// rabbit.__proto__.test(); // Chrome
+// Rabbit.prototype.test(); // Chrome
+// Object.getPrototypeOf(rabbit).test(); // Chrome
+// // 6
 function Hamster() { 
 
 	this.food = [ ]; // пустой "живот"
@@ -100,8 +100,8 @@ lazy = new Hamster();
 speedy.found("яблоко");
 speedy.found("орех");
 
-alert(speedy.food.length); // 2
-alert(lazy.food.length);   // 2 (!??)
+// alert(speedy.food.length); // 2
+// alert(lazy.food.length);   // 2 (!??)
 // 7
 class Person{
 	constructor(legs, arms, canWalk){
@@ -118,21 +118,39 @@ class Programmer extends Person {
 	}
 }
 // 8 
-function Adder(value) {
-	this.value = value;
-	this.addInput = function(){
-		return this.value += Number(prompt("Enter the number")); 
-	}
-	this.showValue = function() {
-		console.log(this.value);
-	}
-}
-var adder = new Adder(1);
-adder.addInput();
-adder.addInput();
-adder.showValue();
+// function Adder(value) {
+// 	this.value = value;
+// 	this.addInput = function(){
+// 		return this.value += Number(prompt("Enter the number")); 
+// 	}
+// 	this.showValue = function() {
+// 		console.log(this.value);
+// 	}
+// }
+// var adder = new Adder(1);
+// adder.addInput();
+// adder.addInput();
+// adder.showValue();
 // 9 
-function sum(x) {
-	return x += x;
+function sum(a) {
+
+  var currentSum = a;
+
+  function f(b) {
+    currentSum += b;
+    return f;
+  }
+
+  f.toString = function() {
+    return currentSum;
+  };
+
+  return f;
 }
-console.log(sum(2)(5));
+// 10
+let element = document.getElementById('demo');
+let text = element.innerHTML;
+setInterval(function() {
+  text = text[text.length - 1] + text.substring(0, text.length - 1);
+  element.innerHTML = text;
+}, 100);

@@ -88,14 +88,15 @@ function Hamster() {
 
 	this.food = [ ]; // пустой "живот"
 
+}
 Hamster.prototype.found = function(something) {
   this.food.push(something);
-}; }
+};
 
 
 // Создаём двух хомяков и кормим первого
-speedy = new Hamster();
-lazy = new Hamster();
+let speedy = new Hamster();
+let lazy = new Hamster();
 
 speedy.found("яблоко");
 speedy.found("орех");
@@ -111,26 +112,26 @@ class Person{
 	}
 }
 class Programmer extends Person {
-	constructor(canCode, isSleeps){
+	constructor(canCode, isSleeps, legs, arms, canWalk){
 		super();
 		this.canCode = true;
 		this.isSleeps = false;
 	}
 }
 // 8 
-// function Adder(value) {
-// 	this.value = value;
-// 	this.addInput = function(){
-// 		return this.value += Number(prompt("Enter the number")); 
-// 	}
-// 	this.showValue = function() {
-// 		console.log(this.value);
-// 	}
-// }
-// var adder = new Adder(1);
-// adder.addInput();
-// adder.addInput();
-// adder.showValue();
+function Adder(value) {
+	this.value = value;
+}
+Adder.prototype.addInput = function(){
+  return this.value += Number(prompt("Enter the number")); 
+}
+Adder.prototype.showValue = function() {
+  console.log(this.value);
+}
+var adder = new Adder(1);
+adder.addInput();
+adder.addInput();
+adder.showValue();
 // 9 
 function sum(a) {
 

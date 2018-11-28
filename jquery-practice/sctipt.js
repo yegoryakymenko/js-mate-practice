@@ -34,7 +34,8 @@ $(function() {
   //  console.log($(this).text());
       let changeName = $('<input type="text" class="changeName">');
       let spanName = $('span.name');
-      $(this).after(changeName); 
+      $(this).after(changeName);
+      changeName.focus();
       changeName.val($(this).text());
       changeName.on('blur', function() {
         let inputValue = changeName.val();
